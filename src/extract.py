@@ -114,7 +114,6 @@ def transform_products(product_df):
             "id",
             "title",
             "category_id",
-            "category",
             "price",
             "discountPercentage",
             "rating",
@@ -179,6 +178,14 @@ transformed_tables = {
     "fact_cart" : fact_cart,
     "fact_cart_item" : fact_cart_item
 }
+
+# calling load_data function to load data into PostgreSQL database
+from load import load_data, close_connection
+
+load_data(transformed_tables)
+close_connection()
+
+
 # checking transformation results
 for table_name, df in transformed_tables.items():
     print(f"\n---{table_name}---")
